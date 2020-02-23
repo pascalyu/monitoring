@@ -46,7 +46,7 @@ class CheckStatusCommand extends Command
         if ($input->getOption('option1')) {
             // ...
         }
-        $this->controller->analyze($this->repository,$this->manager);
+        $this->controller->analyze($this->repository,$this->manager,false);
         $io->success("Cette commandder sert à récupérer le status actuel des sites stockés en base. ENtrer check:status --helo pour plus d infos");
 
         return 0;

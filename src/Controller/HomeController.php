@@ -7,6 +7,8 @@ use App\Entity\Website;
 use App\Repository\StatusRepository;
 use App\Repository\WebsiteRepository;
 use DateTime;
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+    private $mailer;
+    public function __construct(\Swift_Mailer  $mailer){
+        $this->mailer=$mailer;
+        
+
+    }
     /**
      * @Route("/", name="home")
      */
@@ -40,7 +49,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/analyze", name="analyze")
      */
-    public function analyze(WebsiteRepository $websiteRepository, EntityManagerInterface $manager)
+    public function analyze(WebsiteRepository $websiteRepository, EntityManagerInterface $manager,$checkAll=true)
     {
 
         $websites = $websiteRepository->findAll();
@@ -52,6 +61,9 @@ class HomeController extends AbstractController
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
+            if(!$checkAll && $website->getLastStatusCode() === (String)$code ) continue;
+
             curl_close($handle);
             $status = new Status();
             $status->setCode((string) $code);
@@ -59,11 +71,28 @@ class HomeController extends AbstractController
 
             $status->setCreatedAt(new DateTime());
             $manager->persist($status);
+
+            if($status->getCode()==="0"){
+
+                $message = (new \Swift_Message("SymfontMonitoring - Problem"))
+                    ->setFrom("ino@monitoring.com")
+                    ->setTo("pascalyut@gmail.Com")
+                    ->setBody(
+                        $this->renderView("admin/email.html.twig",compact('status','site')),'text/html'
+                    );
+                    $this->mailer->send($message);
+            }
+
         }
         $manager->flush();
         $this->addFlash("success", "le diagnostic a bien été effectué");
         return $this->redirectToRoute("home");
     }
+
+
+ 
+
+
 
 
     /**
