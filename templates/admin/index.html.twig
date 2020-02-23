@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<h1 class="text-center">Dashboard Admin</h1>
+		<div class="d-flex justify-content-around my-5">
+			<a href="{{path('analyze')}}" type="button" class="button btn btn-info ">Lancer le diagnostic
+				<i class="fas fa-tools"></i>
+			</a>
+
+			<a href="{{path('new')}}" type="button" class="button btn btn-success ">Ajouter un site
+				<i class="fas fa-plus"></i>
+			</a>
+
+			<a href="{{path('clean_statuses')}}" type="button" class="button btn btn-warning ">Nettoyer l'historique des status
+				<i class="fas fa-sync-alt"></i>
+			</a>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nom</th>
+					<th scope="col">URL</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for website in websites %}
+					<tr>
+						<td>{{website.id}}</td>
+						<td>{{website.name}}</td>
+						<td>{{website.url}}</td>
+						<td>
+							<a href={{path("edit",{'id': website.id} )}} class='btn btn-warning'>
+								<i class="fas fa-pen"></i>
+							</a>
+							<a href={{path("remove",{'id': website.id} )}} class='btn btn-danger'>
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+
+				{% endfor %}
+			</tbody>
+
+		</table>
+
+	</div>
+{% endblock %}

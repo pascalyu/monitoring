@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="text-center">{{website.name}}</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">URL</th>
+					<th scope="col">Date</th>
+					<th scope="col">Code HTTP</th>
+					<th scope="col">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for status in website.statuses %}
+					<tr>
+						<td>{{website.url}}</td>
+						<td>{{status.createdAt | date("d-m-Y à H:i:s")}}</td>
+						<td>{{status.code}}</td>
+						<td>
+							{% if (status.code == 200 or status.code == 301 or status.code == 302)  %}
+								<i class="fas fa-check"></i>
+							{% elseif (status.code == 404)   %}
+								<i class="fas fa-triangle"></i>
+
+							{% else %}
+								<i class="fas fa-circle"></i>
+							{% endif %}
+						</td>
+					</tr>
+
+				{% endfor %}
+			</tbody>
+
+		</table>
+	</div>
+{% endblock %}

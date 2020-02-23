@@ -1,0 +1,5 @@
+App\Entity\User:
+  user_user:
+    email: test\\@yopmail.com
+    roles: "[]"
+    password: "\\$2y\\$12\\$2kkfeHnCehiX1/511sJ4qO3gGjKEym4IbGAjEGS78FF3WY9LUj906"

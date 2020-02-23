@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="text-center">Votre site de monitoring</h1>
+		
+		<div class="row">
+			{% for website in websites %}
+				<div class="container-website element col-md-4  mt-3">
+					<div class="card bg-success">
+						<div class="card-header">
+							<h3>{{website.name}}</h3>
+							<a href="{{website.url}}" style="color:white">{{website.url}}</a>
+
+						</div>
+						<div class="card-body">
+							{{website.lastStatusCode	}}
+						</div>
+						<a href="{{path('website_show',{'id':website.id})}}" class="card-footer">Voir la fiche</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
