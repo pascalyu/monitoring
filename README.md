@@ -1,23 +1,30 @@
-# monitoring
+# monitoring 
 
-comment installer
+Site de monitoring 
 
-le dl ou git clone sur environnement linux
+## fonctionnalité invité : 
+- visualisation des sites et status
+- visualisation fiche détaillé d'un site
+- login
+## fonctionnalité user:
+- accés dashboard admin
+- lancer diagnostique
+- ajouter / supprimer / editer un site
+- réinitialisation des status
+  
+## Installation local
 
-aller sur le projet et faire 
+### prérequis :
 
-sudo symfony server:start
+ WINDOWS : WAMP
 
-installé composer
-
-sudo apt-get install composer
-
-composer update
-
-
-pour mail
-
-installation de npm 
- et de 
-
-composer require symfony/swiftmailer-bundle
+ LINUX: 
+  - apache2
+  - mysql-server 
+  - composer
+  - npm
+### Etapes  
+- faire un git clone de ce repo
+- aller sur le dossier récupérer
+- lancer commande : **symfony server:start**
+- ouvrir un navigateur et aller sur **localhost:8000**
