@@ -32,6 +32,7 @@ class Status
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Website", inversedBy="statuses")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $website;
 

@@ -20,7 +20,7 @@ class WebsiteType extends AbstractType
                 "label"=>"URL du site web",
                 "attr"=>["placeholder"=>"Entrez une URL valide"]
                 ])
-            ->add('description',TextType::class)
+            ->add('description',TextType::class,array('required' => false))
             ->add('name',TextType::class,[
                 "label"=>"Nom du site",
                 "attr"=>["placeholder"=>"Entrez un nom pour le site"]

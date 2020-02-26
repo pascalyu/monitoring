@@ -78,7 +78,7 @@ class HomeController extends AbstractController
                     ->setFrom("ino@monitoring.com")
                     ->setTo("pascalyut@gmail.Com")
                     ->setBody(
-                        $this->renderView("admin/email.html.twig",compact('status','site')),'text/html'
+                        $this->renderView("admin/email.html.twig",compact('status','website')),'text/html'
                     );
                     $this->mailer->send($message);
             }

@@ -50,7 +50,8 @@ class Website
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="website")
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="website" ,  cascade={"persist", "remove"})
+     * 
      */
     private $statuses;
 
